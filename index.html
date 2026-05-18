@@ -122,17 +122,19 @@
       content: '';
       position: fixed;
       inset: 0;
-      /* Stretches the element to cover the screen */
       z-index: -1;
-      /* Keeps it behind all your content */
       pointer-events: none;
-      /* Ensures it doesn't block any clicks */
 
       background-image:
         var(--grid),
         linear-gradient(to bottom, color-mix(in srgb, var(--color-primary) 6%, transparent) 1px, transparent 1px);
       background-size: 40px 40px;
       background-position: center top;
+
+      /* --- The Safari Hardware Acceleration Hack --- */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     img,
