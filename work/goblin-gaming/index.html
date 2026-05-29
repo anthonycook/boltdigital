@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goblin Gaming Case Study | Bolt Digital</title>
+  <meta name="description" content="How Bolt Digital engineered a custom warehouse and shipping integration for a major tabletop games retailer." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* 
+      Core Bolt Digital Styles 
+      (Keeping your exact variables and base setup for consistency)
+    */
+    :root, [data-theme="light"] {
+      --text-xs: clamp(.75rem, .7rem + .25vw, .875rem);
+      --text-sm: clamp(.875rem, .8rem + .35vw, 1rem);
+      --text-base: clamp(1rem, .95rem + .25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + .75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.75rem, 1.4rem + 4.5vw, 5.5rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --color-bg: #f3f1ec; --color-surface: #f8f7f3; --color-surface-2: #ffffff;
+      --color-surface-offset: #ebe7e0; --color-border: rgba(40, 37, 29, .12);
+      --color-divider: rgba(40, 37, 29, .08); --color-text: #171717;
+      --color-text-muted: #5f5b55; --color-text-faint: #8a847d; --color-text-inverse: #f6f5f1;
+      --color-primary: #0f766e; --color-primary-hover: #0b5d57; --color-primary-highlight: rgba(15, 118, 110, .12);
+      --radius-sm: .5rem; --radius-md: .875rem; --radius-lg: 1.25rem;
+      --radius-xl: 1.75rem; --radius-full: 999px;
+      --shadow-sm: 0 2px 10px rgba(23, 23, 23, .05); --shadow-md: 0 10px 30px rgba(23, 23, 23, .08); --shadow-lg: 0 25px 60px rgba(23, 23, 23, .12);
+      --font-body: 'Manrope', system-ui, sans-serif; --font-display: 'Cabinet Grotesk', 'Inter', sans-serif;
+      --content: 1200px;
+      --grid-svg: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0v40M0 0h40' stroke='rgba(15,118,110,0.15)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    }
+    [data-theme="dark"] {
+      --color-bg: #111110; --color-surface: #171716; --color-surface-2: #1e1d1b;
+      --color-surface-offset: #23211f; --color-border: rgba(255, 255, 255, .1);
+      --color-divider: rgba(255, 255, 255, .08); --color-text: #f3efe8;
+      --color-text-muted: #b6afa5; --color-text-faint: #7f796f; --color-text-inverse: #10100f;
+      --color-primary: #6cc9c0; --color-primary-hover: #8bd7d0; --color-primary-highlight: rgba(108, 201, 192, .12);
+      --shadow-sm: 0 2px 10px rgba(0, 0, 0, .22); --shadow-md: 0 12px 32px rgba(0, 0, 0, .3); --shadow-lg: 0 24px 60px rgba(0, 0, 0, .38);
+      --grid-svg: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0v40M0 0h40' stroke='rgba(108,201,192,0.15)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    }
+    *, :before, :after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body { min-height: 100vh; background-color: var(--color-bg); background-image: var(--grid-svg); background-size: 40px 40px; background-attachment: fixed; color: var(--color-text); font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6; }
+    img, svg { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+    .container { width: min(calc(100% - 2rem), var(--content)); margin-inline: auto; }
+    .section { padding: clamp(var(--space-12), 6vw, var(--space-20)) 0; }
+    
+    /* Nav */
+    .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; background: color-mix(in srgb, var(--color-bg) 84%, transparent); backdrop-filter: blur(18px); }
+    .site-header.scrolled { border-bottom-color: var(--color-divider); }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 84px; gap: var(--space-4); }
+    .brand { display: flex; align-items: center; gap: .9rem; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark { width: 2.8rem; height: 2.8rem; border-radius: 1rem; background-color: #34d399; display: grid; place-items: center; color: #fff; box-shadow: var(--shadow-sm); }
+    .brand-mark svg { width: 1.5rem; height: 1.5rem; }
+    .nav-actions { display: flex; align-items: center; gap: .75rem; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 48px; padding: .95rem 1.2rem; border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 700; transition: .18s ease; }
+    .btn-secondary { border: 1px solid var(--color-border); background: var(--color-surface-2); }
+    .btn-secondary:hover { background: var(--color-surface-offset); }
+    .theme-toggle { width: 48px; height: 48px; flex-shrink: 0; border: 1px solid var(--color-border); border-radius: 50%; display: grid; place-items: center; background: var(--color-surface); }
+
+    /* Case Study Layout */
+    .case-hero { padding: var(--space-16) 0 var(--space-8); text-align: center; max-width: 900px; margin: 0 auto; }
+    .case-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-6); }
+    .case-hero p { color: var(--color-text-muted); font-size: var(--text-lg); max-width: 60ch; margin: 0 auto var(--space-8); }
+    
+    .tags { display: flex; justify-content: center; flex-wrap: wrap; gap: .55rem; margin-bottom: var(--space-8); }
+    .tag { font-size: var(--text-xs); letter-spacing: .08em; text-transform: uppercase; padding: .45rem .7rem; border-radius: var(--radius-full); background: var(--color-primary-highlight); color: var(--color-primary); font-weight: 700; }
+
+    /* Hero Abstract Visual */
+    .case-visual { width: 100%; height: 400px; border-radius: var(--radius-xl); background: radial-gradient(circle at 0% 100%, var(--color-primary-highlight) 0%, var(--color-surface) 70%); border: 1px solid var(--color-border); position: relative; overflow: hidden; margin-bottom: var(--space-16); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md); }
+    .abstract-shape { position: absolute; background: var(--color-primary); opacity: 0.1; border-radius: 50%; width: 400px; height: 400px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .case-visual-content { position: relative; z-index: 2; text-align: center; }
+    .metrics-row { display: flex; gap: var(--space-6); }
+    .metric-card { background: var(--color-surface-2); padding: var(--space-4) var(--space-6); border-radius: var(--radius-md); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+    .metric-value { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 800; color: var(--color-primary); line-height: 1; margin-bottom: var(--space-1); }
+    .metric-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+
+    /* Content Grid */
+    .content-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: var(--space-12); max-width: 1000px; margin: 0 auto; }
+    .content-sidebar { position: sticky; top: 120px; align-self: start; }
+    .sidebar-block { margin-bottom: var(--space-8); }
+    .sidebar-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--color-text-faint); margin-bottom: var(--space-2); }
+    .sidebar-value { font-weight: 600; font-size: var(--text-sm); }
+    
+    .content-body h2 { font-family: var(--font-display); font-size: var(--text-2xl); letter-spacing: -.03em; margin: var(--space-10) 0 var(--space-4); }
+    .content-body h2:first-child { margin-top: 0; }
+    .content-body p { margin-bottom: var(--space-4); color: var(--color-text-muted); font-size: 1.05rem; }
+    
+    .highlight-box { background: var(--color-surface); border-left: 4px solid var(--color-primary); padding: var(--space-6); border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: var(--space-8) 0; }
+    .highlight-box p { margin: 0; color: var(--color-text); font-weight: 500; font-style: italic; }
+
+    /* Animation Classes */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    
+    @media (max-width: 900px) {
+      .content-grid { grid-template-columns: 1fr; gap: var(--space-8); }
+      .content-sidebar { position: static; display: flex; flex-wrap: wrap; gap: var(--space-6); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-divider); }
+      .sidebar-block { margin-bottom: 0; }
+      .case-hero h1 { font-size: var(--text-2xl); }
+      .metrics-row { flex-direction: column; gap: var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13.8 2 6 13h5l-.8 9L18 11h-5.2L13.8 2Z"></path>
+          </svg>
+        </span>
+        <span>Bolt Digital</span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a class="btn btn-secondary" href="/">&larr; Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="case-hero reveal visible">
+          <div class="tags">
+            <span class="tag">API Integration</span>
+            <span class="tag">Logistics Automation</span>
+            <span class="tag">E-commerce Scaling</span>
+          </div>
+          <h1>Automating global logistics for a major tabletop games retailer.</h1>
+          <p>We engineered a seamless bridge between Goblin Gaming's warehouse floor and major international couriers, completely transforming how they process hundreds of daily orders.</p>
+        </div>
+
+        <div class="case-visual reveal visible delay-100">
+          <div class="abstract-shape"></div>
+          <div class="case-visual-content">
+             <div class="metrics-row">
+               <div class="metric-card">
+                 <div class="metric-value">100s</div>
+                 <div class="metric-label">Orders Dispatched Daily</div>
+               </div>
+               <div class="metric-card">
+                 <div class="metric-value">Global</div>
+                 <div class="metric-label">Shipping Unlocked</div>
+               </div>
+             </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <aside class="content-sidebar reveal visible delay-200">
+            <div class="sidebar-block">
+              <div class="sidebar-label">Client</div>
+              <div class="sidebar-value">Goblin Gaming</div>
+            </div>
+            <div class="sidebar-block">
+              <div class="sidebar-label">Industry</div>
+              <div class="sidebar-value">Tabletop Games Retail</div>
+            </div>
+            <div class="sidebar-block">
+              <div class="sidebar-label">Tech Stack</div>
+              <div class="sidebar-value">
+                Go (Golang)<br>
+                Flutter App<br>
+                Shopify GraphQL API
+              </div>
+            </div>
+          </aside>
+
+          <article class="content-body reveal visible delay-200">
+            <h2>The Challenge</h2>
+            <p>As a leading retailer in the tabletop gaming space, Goblin Gaming was facing a severe operational bottleneck. Processing and shipping hundreds of orders a day manually was resulting in delayed dispatch times and placing unnecessary stress on the warehouse packing teams.</p>
+            <p>Furthermore, their existing infrastructure lacked the capability to handle complex international shipping rules effectively, restricting their ability to sell globally and capping their potential profit margins.</p>
+
+            <h2>The Solution</h2>
+            <p>Bolt Digital stepped in to completely overhaul their warehouse management and fulfillment process. We developed a highly optimized, custom warehouse picking application tailored exactly to their floor operations.</p>
+            <p>Using a lightning-fast backend API written in <strong>Go</strong>, we created direct, real-time shipping integrations between their order management system and major couriers like DPD and Royal Mail. To ensure the floor staff had the best possible experience, the user interface was built using <strong>Flutter</strong>, providing a snappy, reliable application for the packing team.</p>
+            <p>By leveraging the <strong>Shopify GraphQL API</strong> and custom App Bridge development, the entire system synchronized perfectly with their existing storefront data.</p>
+
+            <div class="highlight-box">
+              <p>"Our custom integrations allowed packing teams to instantly print and create shipments ready for orders to be dispatched—turning a complex, multi-step chore into a single-click action."</p>
+            </div>
+
+            <h2>The Results</h2>
+            <p>The impact was immediate. The bespoke application eliminated manual data entry, drastically reducing human error and speeding up the dispatch queue. Hundreds of orders that previously took hours to process are now instantly converted into ready-to-ship packages with automated label printing.</p>
+            <p>Crucially, the new infrastructure successfully integrated complex international shipping rates and customs rules. This upgrade tore down their geographical borders, allowing Goblin Gaming to confidently sell to a global audience, driving a significant increase in their overall profits.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="padding: var(--space-8) 0; border-top: 1px solid var(--color-divider); text-align: center; color: var(--color-text-muted); margin-top: var(--space-12);">
+    <div class="container">
+      <p>&copy; 2026 Bolt Digital.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle script
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      function icon(mode) {
+        return mode === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      }
+      function apply(mode) {
+        root.setAttribute('data-theme', mode);
+        toggle.innerHTML = icon(mode);
+        toggle.setAttribute('aria-label', 'Switch to ' + (mode === 'dark' ? 'light' : 'dark') + ' mode');
+      }
+      apply(theme);
+      toggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; apply(theme); });
+      
+      const header = document.querySelector('.site-header');
+      const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      
+      // Animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+      }, { threshold: .16 });
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
