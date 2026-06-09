@@ -910,7 +910,6 @@ button {
   max-width: 650px;
   margin-left: auto;
 }
-
 @media (max-width: 900px) {
   .hero {
     /* Set height to exact visible screen minus the 84px header */
@@ -942,7 +941,7 @@ button {
 
   /* Force the SVG graphic to scale down so it doesn't push the text off-screen */
   .hero-visual svg {
-    max-height: auto;
+    max-height: 35dvh; 
     width: auto;
   }
   
