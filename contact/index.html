@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bolt Digital | Digital Growth & Solutions</title>
+  <meta name="description"
+    content="Bolt Digital engineers digital experiences, high-performance apps, and scalable solutions that help ambitious businesses grow." />
+  <meta property="og:title" content="Bolt Digital | Digital Growth & Solutions" />
+  <meta property="og:description"
+    content="Bolt Digital engineers digital experiences, high-performance apps, and scalable solutions that help ambitious businesses grow." />
+  <meta property="og:image" content="https://boltdigital.uk/og-image.jpg" />
+  <meta property="og:url" content="https://boltdigital.uk" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&amp;f[]=satoshi@400,500,700&amp;display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../main.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="Bolt Digital home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M13.8 2 6 13h5l-.8 9L18 11h-5.2L13.8 2Z"></path>
+          </svg>
+        </span>
+        <span>Bolt Digital</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <a class="btn btn-secondary" href="mailto:hi@boltdigital.uk">Book a call</a>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="5a6bcc8a-78ef-4a6e-94be-a2d0382f0092">
+      <input type="text" name="name" required>
+      <input type="email" name="email" required>
+      <textarea name="message" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; 2026 Bolt Digital.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      function icon(mode) {
+        return mode === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      }
+      function apply(mode) {
+        root.setAttribute('data-theme', mode);
+        toggle.innerHTML = icon(mode);
+        toggle.setAttribute('aria-label', 'Switch to ' + (mode === 'dark' ? 'light' : 'dark') + ' mode');
+      }
+      apply(theme);
+      toggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; apply(theme); });
+      const header = document.querySelector('.site-header');
+      const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+      }, { threshold: .16 });
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            e.preventDefault();
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // Animated number counters
+    function animateCounters() {
+      document.querySelectorAll('[data-count-to]').forEach(el => {
+        const target = parseFloat(el.dataset.countTo);
+        const suffix = el.dataset.suffix || '';
+        const isFloat = target % 1 !== 0;
+        const duration = 1400;
+        const start = performance.now();
+
+        function step(now) {
+          const elapsed = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - elapsed, 3);
+          const value = target * ease;
+          el.textContent = (isFloat ? value.toFixed(1) : Math.round(value)) + suffix;
+          if (elapsed < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    // Trigger counters when the dashboard enters the viewport
+    const dashObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounters(); dashObs.disconnect(); } });
+    }, { threshold: 0.3 });
+
+    const dashEl = document.querySelector('.abstract-dashboard');
+    if (dashEl) dashObs.observe(dashEl);
+  </script>
+</body>
+
+</html>
