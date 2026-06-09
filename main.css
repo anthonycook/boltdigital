@@ -916,7 +916,7 @@ button {
     height: calc(100dvh - 84px);
     min-height: auto;
     /* Reduce top/bottom padding to maximize inner space */
-    padding: var(--space-4) 0;
+    padding: 0;
   }
 
   .hero-grid {
@@ -941,7 +941,7 @@ button {
 
   /* Force the SVG graphic to scale down so it doesn't push the text off-screen */
   .hero-visual svg {
-    max-height: 35dvh; 
+    max-height: auto;
     width: auto;
   }
   
