@@ -911,21 +911,39 @@ button {
   margin-left: auto;
 }
 
-/* Make it stack gracefully on mobile screens */
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;   /* Stacks into a single column */
-    text-align: center;           /* Centers text on mobile */
-    padding-top: var(--space-8);
+  .hero {
+    /* Set height to exact visible screen minus the 84px header */
+    height: calc(100dvh - 84px);
+    min-height: auto;
+    /* Reduce top/bottom padding to maximize inner space */
+    padding: var(--space-4) 0;
   }
 
+  .hero-grid {
+    grid-template-columns: 1fr;
+    /* Define rows: image takes remaining space (1fr), text takes what it needs (auto) */
+    grid-template-rows: 1fr auto; 
+    height: 100%;
+    gap: var(--space-4); /* Reduce gap to save space */
+    text-align: center;
+  }
 
   .hero-visual {
     order: -1;
-          /* Optional: Moves the image ABOVE the text on mobile. Remove this line to keep it below. */
     max-width: 100%;
+    max-height: 100%; /* Prevent container from growing */
     margin: 0 auto;
-  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Force the SVG graphic to scale down so it doesn't push the text off-screen */
+  .hero-visual svg {
+    max-height: auto;
+    width: auto;
   }
   
   .hero-copy h1 {
@@ -933,6 +951,8 @@ button {
     margin: 0 auto; 
     width: 100%;
     display: block;
+    /* Slightly scale down font on very small mobile devices to ensure fit */
+    font-size: clamp(2.5rem, 10vw, 4rem); 
   }
 
   .intro {
@@ -941,6 +961,6 @@ button {
   
   .hero-actions {
     justify-content: center;
+    margin-top: var(--space-6);
   }
 }
-
