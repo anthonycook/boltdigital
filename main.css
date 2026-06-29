@@ -246,7 +246,6 @@ button {
 .hero-copy h1 {
   font-family: var(--font-display);
   line-height: .95;
-  font-size: 58px;
   letter-spacing: -.04em;
   max-width: 1000px;
   font-size: var(--text-3xl);
@@ -679,6 +678,7 @@ button {
 
   .hero-copy h1 {
     max-width: 12ch;
+    
   }
 
   .hero-centered .hero-copy {
@@ -694,6 +694,7 @@ button {
   font-size: clamp(3.5rem, 2rem + 6vw, 7.5rem); 
   line-height: 0.95;
   margin-inline: auto;
+  
 }
 
 .hero-centered p {
@@ -946,6 +947,7 @@ button {
     display: block;
     /* Slightly scale down font on very small mobile devices to ensure fit */
     font-size: clamp(2.5rem, 10vw, 4rem); 
+      font-size: 52px;
   }
 
   .intro {
