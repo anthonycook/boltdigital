@@ -70,7 +70,7 @@
     .theme-toggle { width: 48px; height: 48px; flex-shrink: 0; border: 1px solid var(--color-border); border-radius: 50%; display: grid; place-items: center; background: var(--color-surface); }
 
     /* Case Study Layout */
-    .case-hero { padding: var(--space-16) 0 var(--space-8); text-align: center; max-width: 900px; margin: 0 auto; }
+    .case-hero { padding: 0 0 var(--space-8); text-align: center; max-width: 900px; margin: 0 auto; }
     .case-hero h1 { font-family: var(--font-display); font-size: var(--text-3xl); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-6); }
     .case-hero p { color: var(--color-text-muted); font-size: var(--text-lg); max-width: 60ch; margin: 0 auto var(--space-8); }
     
@@ -147,25 +147,10 @@
             <span class="tag">E-commerce Scaling</span>
           </div>
           <h1>Automating global logistics for a major tabletop games retailer.</h1>
-          <p>We engineered a seamless bridge between Goblin Gaming's warehouse floor and major international couriers, completely transforming how they process hundreds of daily orders.</p>
+          <p>We engineered a seamless bridge between Goblin Gaming's warehouse floor and major international couriers, completely transforming how they process their large daily orders.</p>
         </div>
 
-        <div class="case-visual reveal visible delay-100">
-          <div class="abstract-shape"></div>
-          <div class="case-visual-content">
-             <div class="metrics-row">
-               <div class="metric-card">
-                 <div class="metric-value">100s</div>
-                 <div class="metric-label">Orders Dispatched Daily</div>
-               </div>
-               <div class="metric-card">
-                 <div class="metric-value">Global</div>
-                 <div class="metric-label">Shipping Unlocked</div>
-               </div>
-             </div>
-          </div>
-        </div>
-
+  
         <div class="content-grid">
           <aside class="content-sidebar reveal visible delay-200">
             <div class="sidebar-block">
@@ -180,7 +165,6 @@
               <div class="sidebar-label">Tech Stack</div>
               <div class="sidebar-value">
                 Go (Golang)<br>
-                Flutter App<br>
                 Shopify GraphQL API
               </div>
             </div>
@@ -188,22 +172,22 @@
 
           <article class="content-body reveal visible delay-200">
             <h2>The Challenge</h2>
-            <p>As a leading retailer in the tabletop gaming space, Goblin Gaming was facing a severe operational bottleneck. Processing and shipping hundreds of orders a day manually was resulting in delayed dispatch times and placing unnecessary stress on the warehouse packing teams.</p>
-            <p>Furthermore, their existing infrastructure lacked the capability to handle complex international shipping rules effectively, restricting their ability to sell globally and capping their potential profit margins.</p>
 
-            <h2>The Solution</h2>
-            <p>Bolt Digital stepped in to completely overhaul their warehouse management and fulfillment process. We developed a highly optimized, custom warehouse picking application tailored exactly to their floor operations.</p>
-            <p>Using a lightning-fast backend API written in <strong>Go</strong>, we created direct, real-time shipping integrations between their order management system and major couriers like DPD and Royal Mail. To ensure the floor staff had the best possible experience, the user interface was built using <strong>Flutter</strong>, providing a snappy, reliable application for the packing team.</p>
-            <p>By leveraging the <strong>Shopify GraphQL API</strong> and custom App Bridge development, the entire system synchronized perfectly with their existing storefront data.</p>
+  <p>As a leading retailer in the tabletop gaming space, Goblin Gaming faced frustration with their existing infrastructure. It lacked the capability to handle complex international shipping rules and was prone to failure with non-standard addresses, which restricted their ability to sell globally and capped their potential profit margins.</p>
 
-            <div class="highlight-box">
-              <p>"Our custom integrations allowed packing teams to instantly print and create shipments ready for orders to be dispatched—turning a complex, multi-step chore into a single-click action."</p>
-            </div>
+        <h2>The Solution</h2>
+        <p>Bolt Digital stepped in to completely re-engineer their warehouse shipping integrations. We developed a highly optimised solution to resolve these bottlenecks.</p>
+        <p>Using a lightning-fast backend API written in <strong>Go</strong>, we created direct, real-time shipping integrations between their order management system and major couriers like DPD and Royal Mail.</p>
+        <p>By leveraging the <strong>Shopify GraphQL API</strong> and custom App Bridge development, the entire system synchronised perfectly with their existing storefront data.</p>
 
-            <h2>The Results</h2>
-            <p>The impact was immediate. The bespoke application eliminated manual data entry, drastically reducing human error and speeding up the dispatch queue. Hundreds of orders that previously took hours to process are now instantly converted into ready-to-ship packages with automated label printing.</p>
-            <p>Crucially, the new infrastructure successfully integrated complex international shipping rates and customs rules. This upgrade tore down their geographical borders, allowing Goblin Gaming to confidently sell to a global audience, driving a significant increase in their overall profits.</p>
-          </article>
+        <div class="highlight-box">
+          <p>"Our custom integrations allowed packing teams to instantly print and create shipments that would normally be booked in manually—turning a complex, multi-step chore into a single-click action."</p>
+        </div>
+
+        <h2>The Results</h2>
+        <p>The impact was immediate. The bespoke application eliminated manual data entry, drastically reducing human error and accelerating the dispatch queue. Hundreds of orders that previously took hours to process are now instantly converted into ready-to-ship packages with automated label printing.</p>
+        <p>Crucially, the new infrastructure successfully integrated complex international shipping rates and customs rules. This upgrade removed geographical barriers, allowing Goblin Gaming to confidently sell to a global audience and driving a significant increase in their overall profits.</p>
+         </article>
         </div>
       </div>
     </section>
