@@ -1030,3 +1030,10 @@ button {
 .contact p {
   margin-bottom: 2rem;
 }
+
+@media (max-width: 480px) {
+    .hero-copy h1 {
+      color: red;
+      font-size: 32px;
+    }
+}

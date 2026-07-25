@@ -951,11 +951,14 @@
 
     @media (max-width: 900px) {
       .hero {
-        /* Set height to exact visible screen minus the 84px header */
-        height: calc(100dvh - 84px);
-        min-height: auto;
-        /* Reduce top/bottom padding to maximize inner space */
-        padding: 0 0 var(--space-12) 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto; /* Let both rows size naturally */
+    align-content: center; /* Vertically center the entire group */
+height: calc(100dvh - 84px); /* Restores your full height constraint */
+    min-height: auto;
+
+    gap: var(--space-4);
+    text-align: center;
       }
 
       .hero-grid {
@@ -1079,6 +1082,12 @@
     .social_icon {
       width: 42px;
       height: 42px;
+    }
+
+    @media (max-width: 380px) {
+      .hero-copy h1 {
+        font-size: 38px;
+      }
     }
   </style>
 </head>
@@ -3984,9 +3993,9 @@
               <h3><a href="work/solan-sunbeds/">Overhauling search positioning to dominate a competitive market.</a>
               </h3>
               <div class="tags">
-                <span class="tag">SEO Strategy</span>
-                <span class="tag">Competitor Analysis</span>
-                <span class="tag">Traffic Growth</span>
+                <span class="tag">60% Traffic Growth</span>
+                <span class="tag">Complete SEO Strategy</span>
+                <span class="tag">Detailed Competitor Analysis</span>
               </div>
               <a href="work/solan-sunbeds/" class="case-study-link">View Case Study &rarr;</a>
             </div>
@@ -4003,9 +4012,9 @@
               <h3><a href="work/goblin-gaming/">Automating global logistics for a major tabletop games retailer.</a>
                 </h4>
                 <div class="tags">
-                  <span class="tag">API Integration</span>
-                  <span class="tag">Logistics Automation</span>
-                  <span class="tag">Custom Code</span>
+                  <span class="tag">Automated global logistics</span>
+                  <span class="tag">Ships thousands of orders</span>
+                  <span class="tag">Business critial software</span>
                 </div>
                 <a href="work/goblin-gaming/" class="case-study-link">View Case Study &rarr;</a>
             </div>
